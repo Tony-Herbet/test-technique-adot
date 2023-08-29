@@ -1,0 +1,8 @@
+type Destination {
+    _id: String
+    name: String
+}
+
+type Query {
+    destinations: [Destination]
+}
