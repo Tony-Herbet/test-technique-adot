@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={THEME}>
       <ApolloProvider client={APOLLO_CLIENT}>
-       <App />
+        <App />
       </ApolloProvider>
     </ThemeProvider>
   </React.StrictMode>,
