@@ -2,9 +2,14 @@ import { Box, Switch, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import { AdotTheme, DestinationProp } from '../../types';
+import { ChangeEvent } from 'react';
 
 function SecondRow({ destination }: DestinationProp) {
   const theme: AdotTheme = useTheme();
+
+  const handleToggle = (e: ChangeEvent) => {
+    console.log('click on:', e.target?.ariaLabel)
+  }
   
   return (
     <Box className="description" sx={{ 
@@ -32,7 +37,7 @@ function SecondRow({ destination }: DestinationProp) {
           {destination.address}
         </Typography>
       </Box>
-      <Switch checked={destination.disable? false : true} />
+      <Switch checked={destination.disable? false : true} onChange={(e: ChangeEvent) => handleToggle(e)} inputProps={{ 'aria-label': destination._id}} />
     </Box>
   )
 }

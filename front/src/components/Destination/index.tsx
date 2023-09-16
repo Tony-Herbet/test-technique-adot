@@ -8,10 +8,9 @@ import ThirdRow from './ThirdRow';
 
 function Destination({ destination }: DestinationProp) {
   const theme: AdotTheme = useTheme();
-  console.log(destination)
 
   return (
-    <Box className="destination" key={destination._id} sx={{
+    <Box className="destination" sx={{
         display: "flex",
         flexDirection: "column",
         borderRadius: theme.customBorderRadius.sm,
