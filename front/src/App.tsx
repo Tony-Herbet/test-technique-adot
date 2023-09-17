@@ -8,9 +8,17 @@ import { useEffect } from 'react';
 
 import Header from './components/Header';
 import DestinationComponent from './components/Destination';
-import Form from './components/Form'
+import Form from './containers/Form'
 
-function App({ destinations, saveDestinations, handleLoading, loading, isFormOpen }: AppProps) {
+function App({
+    destinations,
+    saveDestinations,
+    handleLoading,
+    loading,
+    isFormOpen,
+    handleFormOpeningClosing,
+    saveDestinationForm, 
+  }: AppProps) {
   const theme: AdotTheme = useTheme();
 
   const { loading: queryLoading, error } = useQuery(GET_DESTINATIONS)
@@ -26,6 +34,12 @@ function App({ destinations, saveDestinations, handleLoading, loading, isFormOpe
         onError()
       }
   }, [queryLoading, error, handleLoading, saveDestinations]);
+
+  const deleteDestination = (id: string) => {
+    // Should make an API call and retrieve the new destinations instead
+    const newMockDestinations = destinations.filter(destination => destination._id !== id)
+    saveDestinations({destinations: [...newMockDestinations]})
+  }
   
   // if (!data || data.destinations.length === 0) return <>No data</>
 
@@ -39,9 +53,15 @@ function App({ destinations, saveDestinations, handleLoading, loading, isFormOpe
             <Box className="destinations" sx={{display: 'flex', flexWrap: "wrap", justifyContent: 'space-between', marginTop: "30px"}}>
             {
               destinations.map((destination: Destination) => (
-                  <DestinationComponent destination={destination} key={destination._id} />
+                  <DestinationComponent
+                    destination={destination}
+                    handleFormOpeningClosing={handleFormOpeningClosing}
+                    key={destination._id}
+                    deleteDestination={deleteDestination}
+                    saveDestinationForm={saveDestinationForm}
+                  />
                 ))
-              }
+            }
             </Box>
           </Box>
           {isFormOpen && <Form />}

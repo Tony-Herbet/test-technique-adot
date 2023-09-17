@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { AdotTheme, DestinationProp } from '../../types';
+import { AdotTheme, DestinationOnlyProp } from '../../types';
 
-function ThirdRow({ destination }: DestinationProp) {
+function ThirdRow({ destination }: DestinationOnlyProp) {
   const theme: AdotTheme = useTheme();
   
   return (
@@ -18,7 +18,7 @@ function ThirdRow({ destination }: DestinationProp) {
     >
       <Box sx={{ padding: '10px'}}>
         <Typography>
-          {destination.resident}
+          {destination.residents}
         </Typography>
         <Typography sx={{ color: theme.palette.info.main }}>
           Habitants

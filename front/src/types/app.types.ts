@@ -7,4 +7,6 @@ export interface AppProps {
   handleLoading: () => Dispatch<Action>
   loading: boolean
   isFormOpen: boolean
+  handleFormOpeningClosing: () => Dispatch<Action>
+  saveDestinationForm: (destination: Destination) => Dispatch<Action>
 }

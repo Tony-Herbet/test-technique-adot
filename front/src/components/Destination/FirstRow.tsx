@@ -3,13 +3,32 @@ import { useTheme } from '@mui/material/styles';
 
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { AdotTheme, DestinationProp } from '../../types';
+import { AdotTheme, DestinationProps } from '../../types';
 
-function FirstRow({ destination }: DestinationProp) {
+function FirstRow({
+    destination,
+    handleFormOpeningClosing,
+    deleteDestination,
+    saveDestinationForm
+  }: DestinationProps) {
   const theme: AdotTheme = useTheme();
 
   const editColor = destination.disable ? theme.palette.info.light : theme.palette.info.main;
   const deleteColor = destination.disable ? theme.palette.info.light : theme.palette.error.main;
+
+  const handleEdit = () => {
+    if(!destination.disable) {
+      handleFormOpeningClosing();
+      saveDestinationForm(destination);
+    }
+  }
+
+  const handleDelete = () => {
+    if(!destination.disable) {
+      // Should do an API call
+      deleteDestination(destination._id)
+    }
+  }
   
   return (
     <Box className="first_row" sx={{
@@ -27,20 +46,24 @@ function FirstRow({ destination }: DestinationProp) {
           borderRadius: theme.customBorderRadius.sm,
         }}
       >
-        <Button sx={{
+        <Button 
+          sx={{
             backgroundColor: theme.palette.common.white,
             borderRadius: "0px",
             borderTopLeftRadius: theme.customBorderRadius.sm,
             borderBottomLeftRadius: theme.customBorderRadius.sm,
           }}
-          >
+          onClick={handleEdit}
+        >
           <CreateIcon style={{ color: editColor}} />
         </Button>
-        <Button sx={{
-          backgroundColor: theme.palette.common.white,
-          borderRadius: "0px",
-          borderTopRightRadius: theme.customBorderRadius.sm
-        }}
+        <Button 
+          sx={{
+            backgroundColor: theme.palette.common.white,
+            borderRadius: "0px",
+            borderTopRightRadius: theme.customBorderRadius.sm
+          }}
+          onClick={handleDelete}
         >
           <DeleteIcon style={{ color: deleteColor}} />
         </Button>

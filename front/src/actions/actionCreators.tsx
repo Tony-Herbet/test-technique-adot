@@ -1,5 +1,5 @@
-import { Destinations } from '../types'
-import { SAVE_DESTINATIONS } from './actionTypes';
+import { Destination, Destinations } from '../types'
+import { HANDLE_FORM_OPENING_CLOSING, LOADING, SAVE_DESTINATIONS, SAVE_DESTINATION_FORM } from './actionTypes';
 
 // === action creators
 export const saveDestinations = (destinations: Destinations) => ({
@@ -8,9 +8,14 @@ export const saveDestinations = (destinations: Destinations) => ({
 });
 
 export const handleLoading = () => ({
-  type: 'LOADING'
+  type: LOADING
 })
 
-export const handleFormStatus = () => ({
-  type: 'HANDLE_FORM_STATUS'
+export const handleFormOpeningClosing = () => ({
+  type: HANDLE_FORM_OPENING_CLOSING
+})
+
+export const saveDestinationForm = (destination: Destination) => ({
+  type: SAVE_DESTINATION_FORM,
+  destinationForm: destination,
 })

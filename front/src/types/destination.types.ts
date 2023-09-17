@@ -1,8 +1,10 @@
+import { Action, Dispatch } from "redux"
+
 export type Destination = {
     _id: string
     name: string
     address: string
-    resident: string
+    residents: string
     hotels: string
     avg_income: string
     square_kilometer: string
@@ -14,6 +16,12 @@ export type Destinations = {
   destinations: Array<Destination>
 }
 
-export type DestinationProp = {
+export type DestinationOnlyProp = {
   destination: Destination
+}
+
+export interface DestinationProps extends DestinationOnlyProp {
+  handleFormOpeningClosing: () => Dispatch<Action>
+  deleteDestination: (id: string) => void
+  saveDestinationForm: (destination: Destination) => Dispatch<Action>
 }

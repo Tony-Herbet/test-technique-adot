@@ -1,10 +1,40 @@
 import { Box, Button, Typography, Modal, InputLabel, Input } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { AdotTheme } from "../../types";
+import { AdotTheme, FormProps } from "../../types";
+import { ChangeEvent } from "react";
 
 
-function Form() {
+function Form({
+    destinationForm,
+    handleFormOpeningClosing,
+    saveDestinationForm,
+    destinations,
+    saveDestinations
+  }: FormProps) {
   const theme: AdotTheme = useTheme();
+
+  const handleCancel = () => {
+    saveDestinationForm({}) // Clear the state
+    handleFormOpeningClosing()
+  }
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value)
+    const newDestinationForm = {
+      ...destinationForm,
+      [event.target.id]: event.target.value
+    }
+    saveDestinationForm(newDestinationForm)
+  }
+  
+  const handleFormSubmit = () => {
+    // Should do some verification and then make an API call
+    // Work around for now
+    const mockWithoutTheEditedDestination = destinations.filter(destination => destination._id !== destinationForm._id)
+    const newMockDestinations = [...mockWithoutTheEditedDestination, destinationForm];
+    saveDestinations({destinations: [...newMockDestinations]})
+    handleFormOpeningClosing()
+  }
 
   return (
     <Modal open >
@@ -37,7 +67,7 @@ function Form() {
           </Typography>
           <Box>
             <InputLabel 
-              htmlFor="destination"
+              htmlFor="name"
               sx={{
                 fontFamily: "'Roboto', sans-serif",
                 "fontSize": "0.75rem",
@@ -48,7 +78,7 @@ function Form() {
               Nom de la destination
             </InputLabel>
             <Input 
-              id="destination"
+              id="name"
               sx={{
                 width: '100%',
                 fontFamily: "'Roboto', sans-serif",
@@ -56,6 +86,8 @@ function Form() {
                 "fontWeight": 600,
                 "lineHeight": "1.3em"
               }}
+              value={destinationForm.name}
+              onChange={handleInput}
             />
           </Box>
 
@@ -80,12 +112,14 @@ function Form() {
                 "fontWeight": 600,
                 "lineHeight": "1.3em"
               }}
+              value={destinationForm.address}
+              onChange={handleInput}
             />
           </Box>
 
           <Box>
             <InputLabel
-              htmlFor="image"
+              htmlFor="img"
               sx={{
                 fontFamily: "'Roboto', sans-serif",
                 "fontSize": "0.75rem",
@@ -96,7 +130,7 @@ function Form() {
               Lien de l'image
             </InputLabel>
             <Input
-              id="image"
+              id="img"
               sx={{
                 width: '100%',
                 fontFamily: "'Roboto', sans-serif",
@@ -104,7 +138,10 @@ function Form() {
                 "fontWeight": 600,
                 "lineHeight": "1.3em"
               }}
-            />          </Box>
+              value={destinationForm.img}
+              onChange={handleInput}
+            />          
+          </Box>
 
           <Box
             sx={{
@@ -132,6 +169,8 @@ function Form() {
                   "fontWeight": 600,
                   "lineHeight": "1.3em"
                 }}
+                value={destinationForm.residents}
+                onChange={handleInput}
                 />
               </Box>
 
@@ -155,12 +194,14 @@ function Form() {
                   "fontWeight": 600,
                   "lineHeight": "1.3em"
                 }}
+                value={destinationForm.hotels}
+                onChange={handleInput}
               />
             </Box>
 
             <Box>
               <InputLabel
-                htmlFor="income"
+                htmlFor="avg_income"
                 sx={{
                   fontFamily: "'Roboto', sans-serif",
                   "fontSize": "0.75rem",
@@ -171,19 +212,21 @@ function Form() {
                 Revenu Moy (€)
               </InputLabel>
               <Input
-                id="address"
+                id="avg_income"
                 sx={{
                   fontFamily: "'Roboto', sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 600,
                   "lineHeight": "1.3em"
                 }}
+                value={destinationForm.avg_income}
+                onChange={handleInput}
               />
             </Box>
 
             <Box>
               <InputLabel
-                htmlFor="surface"
+                htmlFor="square_kilometer"
                 sx={{
                   fontFamily: "'Roboto', sans-serif",
                   "fontSize": "0.75rem",
@@ -194,13 +237,15 @@ function Form() {
                 Superficie (km²)
               </InputLabel>
               <Input
-                id="surface"
+                id="square_kilometer"
                 sx={{
                   fontFamily: "'Roboto', sans-serif",
                   "fontSize": "0.875rem",
                   "fontWeight": 600,
                   "lineHeight": "1.3em"
                 }}
+                value={destinationForm.square_kilometer}
+                onChange={handleInput}
               />            
             </Box>
           </Box>
@@ -212,27 +257,31 @@ function Form() {
               gap: '34px'
             }}
           >
-            <Button sx={{ 
-              backgroundColor: theme.palette.common.white,
-              borderRadius: theme.customBorderRadius.sm,
-              fontFamily: "Roboto",
-              color: theme.palette.common.black, 
-              "fontSize": "0.875rem",
-              "textTransform": "uppercase",
-              "fontWeight": 500, 
-            }}
+            <Button
+              sx={{ 
+                backgroundColor: theme.palette.common.white,
+                borderRadius: theme.customBorderRadius.sm,
+                fontFamily: "Roboto",
+                color: theme.palette.common.black, 
+                "fontSize": "0.875rem",
+                "textTransform": "uppercase",
+                "fontWeight": 500, 
+              }}
+              onClick={handleCancel}
             >
               annuler
             </Button>
-            <Button sx={{ 
-              backgroundColor: theme.palette.primary.main,
-              borderRadius: theme.customBorderRadius.sm,
-              fontFamily: "Roboto",
-              color: theme.palette.common.black, 
-              "fontSize": "0.875rem",
-              "textTransform": "uppercase",
-              "fontWeight": 500,
-            }}
+            <Button
+              sx={{ 
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: theme.customBorderRadius.sm,
+                fontFamily: "Roboto",
+                color: theme.palette.common.black, 
+                "fontSize": "0.875rem",
+                "textTransform": "uppercase",
+                "fontWeight": 500,
+              }}
+              onClick={handleFormSubmit}
             >
               ajouter
             </Button>

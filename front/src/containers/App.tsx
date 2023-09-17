@@ -2,15 +2,15 @@ import { connect } from 'react-redux';
 import { Action, Dispatch } from 'redux';
 
 import App  from '../App';
-import { handleLoading, saveDestinations } from '../actions/actionCreators';
-import { Destinations, State } from '../types';
+import { handleFormOpeningClosing, handleLoading, saveDestinations, saveDestinationForm } from '../actions/actionCreators';
+import { Destination, Destinations, State } from '../types';
 import { FunctionComponent } from 'react';
 
 // === mapStateToProps
 const mapStateToProps = (state: State) => ({
   destinations: state.destinations.destinations,
   loading: state.utils.loading,
-  isFormOpen: state.utils.isFormOpen
+  isFormOpen: state.form.isFormOpen
 });
 
 // === mapDispatchToProps
@@ -20,6 +20,12 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   },
   handleLoading: () => {
     dispatch(handleLoading())
+  },
+  handleFormOpeningClosing: () => {
+    dispatch(handleFormOpeningClosing())
+  },
+  saveDestinationForm: (destination: Destination) => {
+    dispatch(saveDestinationForm(destination))
   }
 });
 

@@ -1,10 +1,10 @@
 import { Box, Switch, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { AdotTheme, DestinationProp } from '../../types';
+import { AdotTheme, DestinationOnlyProp } from '../../types';
 import { ChangeEvent } from 'react';
 
-function SecondRow({ destination }: DestinationProp) {
+function SecondRow({ destination }: DestinationOnlyProp) {
   const theme: AdotTheme = useTheme();
 
   const handleToggle = (e: ChangeEvent) => {

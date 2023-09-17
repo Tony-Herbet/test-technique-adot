@@ -1,12 +1,17 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { AdotTheme, DestinationProp } from '../../types';
+import { AdotTheme, DestinationProps } from '../../types';
 import FirstRow from './FirstRow';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 
-function Destination({ destination }: DestinationProp) {
+function Destination({
+    destination,
+    handleFormOpeningClosing,
+    deleteDestination,
+    saveDestinationForm
+  }: DestinationProps) {
   const theme: AdotTheme = useTheme();
 
   return (
@@ -21,7 +26,12 @@ function Destination({ destination }: DestinationProp) {
       }}
     >
     
-      <FirstRow destination={destination} />
+      <FirstRow
+        destination={destination}
+        handleFormOpeningClosing={handleFormOpeningClosing}
+        deleteDestination={deleteDestination}
+        saveDestinationForm={saveDestinationForm}
+      />
       <SecondRow destination={destination} />
       <ThirdRow destination={destination} />
     </Box>
