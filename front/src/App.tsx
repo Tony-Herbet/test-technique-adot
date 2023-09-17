@@ -7,9 +7,10 @@ import mockDestinations from './mocks/destinations';
 import { useEffect } from 'react';
 
 import Header from './components/Header';
-import DestinationComponent from './components/Destination'
+import DestinationComponent from './components/Destination';
+import Form from './components/Form'
 
-function App({ destinations, saveDestinations, handleLoading, loading }: AppProps) {
+function App({ destinations, saveDestinations, handleLoading, loading, isFormOpen }: AppProps) {
   const theme: AdotTheme = useTheme();
 
   const { loading: queryLoading, error } = useQuery(GET_DESTINATIONS)
@@ -32,16 +33,19 @@ function App({ destinations, saveDestinations, handleLoading, loading }: AppProp
     <>
       {loading && <>Loading</>}
       {!loading && (
-        <Box sx={{backgroundColor: theme.palette.background?.default, padding: "30px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <Header />
-          <Box className="destinations" sx={{display: 'flex', flexWrap: "wrap", justifyContent: 'space-between', marginTop: "30px"}}>
-          {
-            destinations.map((destination: Destination) => (
-                <DestinationComponent destination={destination} key={destination._id} />
-              ))
-            }
+        <>
+          <Box sx={{backgroundColor: theme.palette.background?.default, padding: "30px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <Header />
+            <Box className="destinations" sx={{display: 'flex', flexWrap: "wrap", justifyContent: 'space-between', marginTop: "30px"}}>
+            {
+              destinations.map((destination: Destination) => (
+                  <DestinationComponent destination={destination} key={destination._id} />
+                ))
+              }
+            </Box>
           </Box>
-        </Box>
+          {isFormOpen && <Form />}
+        </>
       )}
     </>
   )

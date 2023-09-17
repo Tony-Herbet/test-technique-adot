@@ -19,7 +19,7 @@ function Header() {
       </Typography>
       <Button sx={{ 
         backgroundColor: theme.palette.primary.main,
-        fontFamily: "Roboto",
+        fontFamily: "'Roboto', sans-serif",
         color: theme.palette.common.black, 
         "fontSize": "0.875rem",
         "textTransform": "uppercase",

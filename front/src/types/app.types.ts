@@ -6,13 +6,5 @@ export interface AppProps {
   saveDestinations: (destinations: Destinations) => Dispatch<Action>
   handleLoading: () => Dispatch<Action>
   loading: boolean
-}
-
-export interface State {
-  app: AppState
-}
-
-export interface AppState {
-  destinations: Array<Destinations>
-  loading: boolean
+  isFormOpen: boolean
 }
