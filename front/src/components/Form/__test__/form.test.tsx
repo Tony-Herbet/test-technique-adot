@@ -30,5 +30,6 @@ describe('<Form />', () => {
     expect(screen.getByText('Ajouter une nouvelle destination')).toBeInTheDocument();
     expect(screen.getByText('Nom de la destination')).toBeInTheDocument();
     expect(screen.getByText('Adresse')).toBeInTheDocument();
+    expect(screen.getByText('Lien de l\'image')).toBeInTheDocument();
   })
 });
