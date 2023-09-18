@@ -3,14 +3,14 @@ import { useTheme } from '@mui/material/styles';
 
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { AdotTheme, DestinationProps } from '../../types';
+import { AdotTheme, DestinationFirstRow } from '../../types';
 
 function FirstRow({
     destination,
     handleFormOpeningClosing,
     deleteDestination,
     saveDestinationForm
-  }: DestinationProps) {
+  }: DestinationFirstRow) {
   const theme: AdotTheme = useTheme();
 
   const editColor = destination.disable ? theme.palette.info.light : theme.palette.info.main;

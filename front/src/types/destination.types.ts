@@ -20,8 +20,22 @@ export type DestinationOnlyProp = {
   destination: Destination
 }
 
-export interface DestinationProps extends DestinationOnlyProp {
+export interface DestinationToggleProp {
+  toggleDestination: (id: string) => void
+}
+
+export interface DestinationProps extends DestinationOnlyProp, DestinationToggleProp {
   handleFormOpeningClosing: () => Dispatch<Action>
   deleteDestination: (id: string) => void
   saveDestinationForm: (destination: Destination) => Dispatch<Action>
+}
+
+export interface DestinationFirstRow extends DestinationOnlyProp  {
+  handleFormOpeningClosing: () => Dispatch<Action>
+  deleteDestination: (id: string) => void
+  saveDestinationForm: (destination: Destination) => Dispatch<Action>
+}
+
+export interface DestinationSecondRow extends DestinationOnlyProp {
+  toggleDestination: (id: string) => void
 }

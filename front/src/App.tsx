@@ -40,6 +40,24 @@ function App({
     const newMockDestinations = destinations.filter(destination => destination._id !== id)
     saveDestinations({destinations: [...newMockDestinations]})
   }
+
+  const toggleDestination = (id: string) => {
+    // Should make an API call
+    const newMockDestinations = destinations.map(destination => {
+      if(destination._id === id) {
+        const newDestination = {
+          ...destination,
+          disable: !destination.disable
+        };
+
+        return newDestination;
+      } else {
+        return destination
+      }
+    })
+
+    saveDestinations({destinations: [...newMockDestinations]})
+  }
   
   // if (!data || data.destinations.length === 0) return <>No data</>
 
@@ -59,6 +77,7 @@ function App({
                     key={destination._id}
                     deleteDestination={deleteDestination}
                     saveDestinationForm={saveDestinationForm}
+                    toggleDestination={toggleDestination}
                   />
                 ))
             }

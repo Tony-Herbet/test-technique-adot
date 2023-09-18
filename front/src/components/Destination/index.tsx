@@ -10,7 +10,8 @@ function Destination({
     destination,
     handleFormOpeningClosing,
     deleteDestination,
-    saveDestinationForm
+    saveDestinationForm,
+    toggleDestination
   }: DestinationProps) {
   const theme: AdotTheme = useTheme();
 
@@ -32,7 +33,7 @@ function Destination({
         deleteDestination={deleteDestination}
         saveDestinationForm={saveDestinationForm}
       />
-      <SecondRow destination={destination} />
+      <SecondRow destination={destination} toggleDestination={toggleDestination} />
       <ThirdRow destination={destination} />
     </Box>
   )

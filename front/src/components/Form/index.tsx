@@ -19,7 +19,6 @@ function Form({
   }
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
     const newDestinationForm = {
       ...destinationForm,
       [event.target.id]: event.target.value
@@ -63,7 +62,7 @@ function Form({
             "fontFamily": "'Poppins', sans-serif",
           }}
           >
-              Ajouter une nouvelle destination
+            Ajouter une nouvelle destination
           </Typography>
           <Box>
             <InputLabel 
