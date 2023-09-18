@@ -32,5 +32,6 @@ describe('<Form />', () => {
     expect(screen.getByText('Adresse')).toBeInTheDocument();
     expect(screen.getByText('Lien de l\'image')).toBeInTheDocument();
     expect(screen.getByText('Nombre d\'habitants')).toBeInTheDocument();
+    expect(screen.getByText('Nombre d\'hôtels')).toBeInTheDocument();
   })
 });
